@@ -5,17 +5,16 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import Videos from '../screens/HomeScreen';
+import Camera from '../screens/Camera';
 
 export default TabNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    Videos: {
+      screen: Videos,
     },
-    Settings: {
-      screen: SettingsScreen,
+    Camera: {
+      screen: Camera,
     },
   },
   {
@@ -24,15 +23,15 @@ export default TabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         switch (routeName) {
-          case 'Home':
+          case 'Videos':
             iconName =
               Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
+                ? `ios-folder-open${focused ? '' : '-outline'}`
                 : 'md-information-circle';
             break;
-          case 'Settings':
+          case 'Camera':
             iconName =
-              Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options';
+              Platform.OS === 'ios' ? `ios-videocam${focused ? '' : '-outline'}` : 'md-videocam';
         }
         return (
           <Ionicons

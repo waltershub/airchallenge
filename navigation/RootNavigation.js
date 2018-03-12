@@ -21,6 +21,10 @@ const RootStackNavigator = StackNavigator(
 );
 
 export default class RootNavigator extends React.Component {
+  state = {
+    videos: [],
+  };
+
   componentDidMount() {
     this._notificationSubscription = this._registerForPushNotifications();
   }
@@ -29,8 +33,14 @@ export default class RootNavigator extends React.Component {
     this._notificationSubscription && this._notificationSubscription.remove();
   }
 
+  saveVideo = video => {
+    this.setState({ videos: this.state.videos.push(video) });
+  };
+
   render() {
-    return <RootStackNavigator />;
+    return (
+      <RootStackNavigator screenProps={{ saveVideo: this.saveVideo, videos: this.state.videos }} />
+    );
   }
 
   _registerForPushNotifications() {
