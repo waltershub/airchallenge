@@ -38,11 +38,9 @@ export default class RootNavigator extends React.Component {
   }
 
   saveVideo = video => {
-    console.log(typeof this, this.state.videos);
-    console.log(typeof video);
     let videos = this.state.videos.slice();
     videos.push(video);
-    this.setState({ videos }, () => console.log(this.state.videos));
+    this.setState({ videos });
   };
 
   render() {
