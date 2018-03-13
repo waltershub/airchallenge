@@ -5,3 +5,9 @@
 ## try it out
 
 [On Expo](https://exp.host/@waltershub/airchallenge)
+
+
+## Screenshots
+
+![](readme/ss1.png?raw=true)
+![](readme/ss2.png?raw=true)
