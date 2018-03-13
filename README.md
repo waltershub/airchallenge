@@ -9,5 +9,5 @@
 
 ## Screenshots
 
-![](readme/ss1.png?raw=true)
-![](readme/ss2.png?raw=true)
+![](readme/ss1.PNG?raw=true)
+![](readme/ss2.PNG?raw=true)
