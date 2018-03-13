@@ -8,9 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
+import uniqueId from 'lodash.uniqueid';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -27,8 +25,8 @@ export default class HomeScreen extends React.Component {
         {videos.map(video => (
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Player', { video: video.video.uri })}
-            style={{ height: 200, width: 200, padding: 10 }}
-            key={video.thumbnail.height}>
+            style={{ height: 200, width: 200, marginBottom: 20 }}
+            key={uniqueId()}>
             <Image style={{ height: 200, width: 200 }} source={{ uri: video.thumbnail.uri }} />
           </TouchableOpacity>
         ))}
