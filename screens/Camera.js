@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { EvilIcons, Foundation } from '@expo/vector-icons';
 
@@ -8,6 +8,10 @@ export default class CameraScreen extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     recording: false,
+    time: 0,
+    recordingText: '',
+    video: null,
+    thumbnail: null,
   };
 
   async componentWillMount() {
@@ -17,17 +21,22 @@ export default class CameraScreen extends React.Component {
   }
 
   record = async () => {
-    this.setState({ recording: true });
+    this.setState({ recording: true, recordingText: 'recording' });
+    let thumbnail = await this.camera.takePictureAsync();
     let video = await this.camera.recordAsync();
-    console.log(video);
+    this.setState({ video, thumbnail });
+    this.props.screenProps.saveVideo({ video, thumbnail });
   };
 
   stopRecording = () => {
+    this.setState({ recording: false, recordingText: '' });
     this.camera.stopRecording();
   };
 
+  goToVideo = () => {
+    this.props.navigation.navigate('Player', { video: this.state.video.uri });
+  };
   render() {
-    console.log(this.Camera);
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -36,7 +45,7 @@ export default class CameraScreen extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Text>Recording</Text>
+          <Text>{this.state.recordingText}</Text>
           <Camera
             style={{ flex: 1 }}
             type={this.state.type}
@@ -80,6 +89,16 @@ export default class CameraScreen extends React.Component {
                 }}
               />
             </View>
+            {this.state.video ? (
+              <TouchableOpacity style={{ height: 50, width: 50 }} onPress={this.goToVideo}>
+                <Image
+                  style={{ height: 50, width: 50 }}
+                  source={{ uri: this.state.thumbnail.uri }}
+                />
+              </TouchableOpacity>
+            ) : (
+              <View />
+            )}
           </Camera>
         </View>
       );

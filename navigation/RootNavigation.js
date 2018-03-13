@@ -4,11 +4,15 @@ import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
+import Player from '../screens/videoplayer.js';
 
 const RootStackNavigator = StackNavigator(
   {
     Main: {
       screen: MainTabNavigator,
+    },
+    Player: {
+      screen: Player,
     },
   },
   {
@@ -34,7 +38,11 @@ export default class RootNavigator extends React.Component {
   }
 
   saveVideo = video => {
-    this.setState({ videos: this.state.videos.push(video) });
+    console.log(typeof this, this.state.videos);
+    console.log(typeof video);
+    let videos = this.state.videos.slice();
+    videos.push(video);
+    this.setState({ videos }, () => console.log(this.state.videos));
   };
 
   render() {
