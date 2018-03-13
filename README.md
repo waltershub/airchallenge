@@ -2,7 +2,8 @@
 
 > Basic implementation of a Video Recorder react-native
 ## BUGS
->doesn't create thumbnail if you push the record button too fast 
+>doesn't create thumbnail if you push the record button too fast,
+## refactoring
 >styles need to be improved and refactored
 ## try it out
 
