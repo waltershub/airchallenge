@@ -9,6 +9,8 @@ import {
   View,
 } from 'react-native';
 import uniqueId from 'lodash.uniqueid';
+import { Video } from 'expo';
+import VideoThumb from '../components/videoThumb.js';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -26,12 +28,11 @@ export default class HomeScreen extends React.Component {
         {videos.length === 0 ? <Text>start making some memories</Text> : null}
         <ScrollView>
           {videos.map(video => (
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Player', { video: video.video.uri })}
-              style={{ height: 200, width: 200, marginBottom: 20 }}
-              key={uniqueId()}>
-              <Image style={{ height: 200, width: 200 }} source={{ uri: video.thumbnail.uri }} />
-            </TouchableOpacity>
+            <VideoThumb
+              key={uniqueId()}
+              navigate={this.props.navigation.navigate}
+              videoUri={video.video.uri}
+            />
           ))}
         </ScrollView>
       </View>
@@ -39,6 +40,18 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+// const VideoThumb = props => (
+//   <TouchableOpacity
+//     onPress={() => props.navigate('Player', { video: props.videoUri })}
+//     style={{ height: 200, width: 200, marginBottom: 20 }}>
+//     <Video
+//       style={{ height: 200, width: 200 }}
+//       source={{ uri: props.videoUri }}
+//       usePoster
+//       shouldPlay={false}
+//     />
+//   </TouchableOpacity>
+// );
 const styles = StyleSheet.create({
   container: {
     flex: 1,

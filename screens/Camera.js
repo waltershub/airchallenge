@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import { Camera, Permissions, Video } from 'expo';
 import { EvilIcons, Foundation } from '@expo/vector-icons';
 
 export default class CameraScreen extends React.Component {
@@ -22,10 +22,10 @@ export default class CameraScreen extends React.Component {
 
   record = async () => {
     this.setState({ recording: true, recordingText: 'recording' });
-    let thumbnail = await this.camera.takePictureAsync();
+    //let thumbnail = await this.camera.takePictureAsync();
     let video = await this.camera.recordAsync();
-    this.setState({ video, thumbnail });
-    this.props.screenProps.saveVideo({ video, thumbnail });
+    this.setState({ video });
+    this.props.screenProps.saveVideo({ video });
   };
 
   stopRecording = () => {
@@ -91,9 +91,11 @@ export default class CameraScreen extends React.Component {
             </View>
             {this.state.video ? (
               <TouchableOpacity style={{ height: 50, width: 50 }} onPress={this.goToVideo}>
-                <Image
+                <Video
                   style={{ height: 50, width: 50 }}
-                  source={{ uri: this.state.thumbnail.uri }}
+                  source={{ uri: this.state.video.uri }}
+                  usePoster
+                  shouldPlay={false}
                 />
               </TouchableOpacity>
             ) : (
