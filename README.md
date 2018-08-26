@@ -1,4 +1,4 @@
-# react-native-weather-app
+# React Native Video Recorder
 
 > Basic implementation of a Video Recorder react-native
 ## BUGS
